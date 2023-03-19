@@ -1,7 +1,9 @@
 from django.urls import path
-from AppCoder.views import inicio, index
+from AppCoder.views import *
 
 urlpatterns = [
-    path('', inicio),
-    path('index/',index)
+    path('',index,name="index"),
+    path('clientes/',clientes,name="clientes"),
+    path('productos/',productos,name="productos"),
+    path('stock/',stock,name="stock"),
     ]

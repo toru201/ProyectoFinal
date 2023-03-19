@@ -21,9 +21,6 @@ from mysite.views import saludo_2, probandoTemplate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('saludo/',saludo),
-    path('saludo2/',saludo_2),
-    path("probandoTemplate/",probandoTemplate),
     path("", index),
     path('AppCoder/',include('AppCoder.urls'))
     ]
