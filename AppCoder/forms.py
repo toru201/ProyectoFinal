@@ -1,18 +1,18 @@
 from django import forms
-from AppCoder.models import productos
-from AppCoder.models import clientes
-from AppCoder.models import stock
+from AppCoder.models import Productos
+from AppCoder.models import Clientes
+from AppCoder.models import Stock
 
 class ProductosForm(forms.ModelForm):
     class Meta:
-        model=productos
+        model=Productos
         fields=[
             "codigo_producto",
             "categoria_producto"
         ]
         labels={
-            'codigo_producto': "codigo",
-            'categoria_producto':'categoria'}
+            'codigo_producto': "Codigo",
+            'categoria_producto':'Categoria'}
         widget={
             'codigo_producto': forms.TextInput(attrs={'class':'form-control'}),
             'categoria_producto':forms.TextInput(attrs={'class':'form-control'}),
@@ -20,13 +20,13 @@ class ProductosForm(forms.ModelForm):
 
 class ClientesForm(forms.ModelForm):
     class Meta:
-        model=clientes
+        model=Clientes
         fields='__all__'
 
 class StockForm(forms.ModelForm):
     class Meta:
-        model=stock
+        model=Stock
         fields='__all__'
 
-class BuscarCodigoForm(forms.ModelForm):
-    codigo=forms.CharField(max_length=20)
+class BuscarCodigoForm(forms.Form):
+    codigo=forms.IntegerField()

@@ -7,16 +7,17 @@
 
 <h1> PAGINA DE AGREGAR PRODUCTOS </h1>
 
-<form action="" method="POST">
+<form action="" class="agregar_productos" method="POST">
     {% csrf_token %}
-    <table>
-
-        {{ miFormulario.as_table }}
-
-    <table>
+    {{form}}
+    <br>
+    <button type="submit" id="btnEnviar" class="button">Enviar</button>
     
-    <input type = "submit" value="Enviar">
-</form>   
+    
+</form> 
+<table id="tabla">
+</table>
+    
 {% endblock %}
         
         
