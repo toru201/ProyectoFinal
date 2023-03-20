@@ -1,0 +1,20 @@
+{% extends 'AppCoder/base.html' %}
+{% load static %}
+
+{% block title %}Productos{% endblock %}
+
+{% block contenido_que_cambia%}
+
+<h1> PAGINA DE BUSCAR PRODUCTOS </h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <p> Codigo: <input type="number" name="codigo">
+    
+    <input type = "submit" value="Enviar">
+</form>
+{{data}}   
+{% endblock %}
+        
+        
+

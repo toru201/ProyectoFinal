@@ -1,0 +1,23 @@
+{% extends 'AppCoder/base.html' %}
+{% load static %}
+
+{% block title %}Productos{% endblock %}
+
+{% block contenido_que_cambia%}
+
+<h1> PAGINA DE AGREGAR PRODUCTOS </h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+
+        {{ miFormulario.as_table }}
+
+    <table>
+    
+    <input type = "submit" value="Enviar">
+</form>   
+{% endblock %}
+        
+        
+
