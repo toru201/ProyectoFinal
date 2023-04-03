@@ -50,7 +50,7 @@ def stock(request):
  
     return render(request,'AppCoder/stock.html',data)
 
-def guardar_forms(request):
+def guardar_codigos(request):
     
     data={
          'form':ProductosForm()
@@ -63,8 +63,37 @@ def guardar_forms(request):
         else:
             data["form"] = miFormulario
  
-    return render(request, 'AppCoder/guardar_forms.html', data)
+    return render(request, 'AppCoder/guardar_codigos.html', data)
 
+def mostrar_codigos(request):
+
+    codigos=Productos.objects.all()
+
+    return render(request, "AppCoder/mostrar_codigos.html",{"codigos":codigos})
+
+def eliminar_codigos(request, id_productos):
+
+    codigos=Productos.objects.get(id=id_productos)
+    codigo_eliminado=codigos.codigo_producto
+    codigos.delete()
+
+    return render(request, "AppCoder/eliminar_codigos.html",{"codigo_eliminado":codigo_eliminado})
+
+def editar_codigos(request, id_productos):
+    
+    codigos=Productos.objects.get(id=id_productos)
+
+    if request.method=="POST":
+        productos_form=ProductosForm(request.POST)
+        if productos_form.is_valid():
+            data=productos_form.cleaned_data
+            codigos.codigo_producto=data["codigo_producto"]
+            codigos.categoria_producto=data["categoria_producto"]
+            codigos.save()
+            return render(request, "AppCoder/index.html")
+    else:
+        productos_form=ProductosForm(initial={'codigo_producto':codigos.codigo_producto,'categoria_producto':codigos.categoria_producto})
+        return render(request, "AppCoder/editar_codigos.html",{'form':productos_form})
 
 def buscar_codigo(request):
     if request.method=="POST":

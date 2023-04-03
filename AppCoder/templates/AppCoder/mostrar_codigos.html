@@ -1,0 +1,31 @@
+{% extends 'AppCoder/base.html' %}
+{% load static %}
+
+{% block title %}CODIGOS{% endblock %}
+
+{% block contenido_que_cambia%}
+
+<h1> PAGINA DE MOSTRAR CODIGOS DE LA BD </h1>
+ 
+<table>
+    <th>id</th>
+
+    <th> codigo </th>
+
+    <th> categoria </th>
+
+    {% for codigo in codigos %}
+        <tr>
+            <td>{{codigo.id}}</td>
+            <td>{{codigo.codigo_producto}}</td>
+            <td>{{codigo.categoria_producto}}</td>
+            <td><a href="{% url 'editar_codigos' codigo.id %}">Editar</a></td>
+            <td><a href="{% url 'eliminar_codigos' codigo.id %}">Eliminar</a></td>
+        </tr>
+    {% endfor %}
+</table>
+    
+{% endblock %}
+        
+        
+
