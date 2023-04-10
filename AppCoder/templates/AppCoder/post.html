@@ -3,11 +3,16 @@
 
 {% block contenido_que_cambia%}
 
+
 <form class="form" method="post">
     {% csrf_token %}
     {{form.as_p}}
     <button type="submit" id="submit">Postear</button>
 </form>
+
+
+
+
 
 {% endblock %}
 

@@ -17,6 +17,9 @@ urlpatterns = [
     path('register/',register,name="register"),
     path('login/',LoginView.as_view(template_name="AppCoder/login.html"),name="login"),
     path('logout/',LogoutView.as_view(template_name="AppCoder/logout.html"),name="logout"),
+    path('profile/',profile,name="profile"),
+    path('profile/<str:username>/',profile,name="profile"),
+    path('editarPerfil/',editarPerfil, name='editarPerfil'),
          
     ]
 

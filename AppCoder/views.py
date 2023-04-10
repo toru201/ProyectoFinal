@@ -7,6 +7,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -166,3 +167,39 @@ def post(request):
     else:
         form=PostForm()
     return render(request, 'AppCoder/post.html', {'form': form})
+
+def profile(request,username=None):
+    current_user=request.user
+    if username and username != current_user.username:
+        user= User.objects.get(username=username)
+        
+    else:
+        
+        user=current_user
+    return render(request, 'AppCoder/profile.html',{'user':user})
+
+def editarPerfil(request):
+       
+      usuario = request.user
+      
+      if request.method == 'POST':
+            
+            miFormulario = UserEditForm(request.POST)
+            
+            if miFormulario.is_valid():
+                
+                  
+                  informacion = miFormulario.cleaned_data
+                  
+                  usuario.email = informacion['email']
+                  usuario.password1 = informacion['password1']
+                  usuario.password2 = informacion['password2']
+                  usuario.save()
+            
+                  return render(request, "AppCoder/index.html",{"mensaje": "Se edito exitosamente el usuario "})
+
+      else:
+            
+            miFormulario = UserEditForm(initial={'email':usuario.email})
+      
+      return render(request, "AppCoder/editarPerfil.html", {"miFormulario": miFormulario, "usuario": usuario})
