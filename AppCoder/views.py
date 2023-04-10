@@ -75,6 +75,12 @@ def mostrar_codigos(request):
 
     return render(request, "AppCoder/mostrar_codigos.html",{"codigos":codigos})
 
+def mostrar_clientes(request):
+
+    codigos=Clientes.objects.all()
+
+    return render(request, "AppCoder/mostrar_clientes.html",{"codigos":codigos})
+
 def eliminar_codigos(request, id_productos):
 
     codigos=Productos.objects.get(id=id_productos)
@@ -82,6 +88,14 @@ def eliminar_codigos(request, id_productos):
     codigos.delete()
 
     return render(request, "AppCoder/eliminar_codigos.html",{"codigo_eliminado":codigo_eliminado})
+
+def eliminar_clientes(request, id_clientes):
+
+    clientes=Clientes.objects.get(id=id_clientes)
+    cliente_eliminado=clientes.correo
+    clientes.delete()
+
+    return render(request, "AppCoder/eliminar_clientes.html",{"cliente_eliminado":cliente_eliminado})
 
 def editar_codigos(request, id_productos):
     
@@ -98,6 +112,23 @@ def editar_codigos(request, id_productos):
     else:
         productos_form=ProductosForm(initial={'codigo_producto':codigos.codigo_producto,'categoria_producto':codigos.categoria_producto})
         return render(request, "AppCoder/editar_codigos.html",{'form':productos_form})
+    
+def editar_clientes(request, id_clientes):
+    
+    clientes=Clientes.objects.get(id=id_clientes)
+
+    if request.method=="POST":
+        clientes_form=ClientesForm(request.POST)
+        if clientes_form.is_valid():
+            data=clientes_form.cleaned_data
+            clientes.nombre=data["nombre"]
+            clientes.apellido=data["apellido"]
+            clientes.correo=data["correo"]
+            clientes.save()
+            return render(request, "AppCoder/index.html")
+    else:
+        clientes_form=ClientesForm(initial={'nombre':clientes.nombre,'apellido':clientes.apellido,'correo':clientes.correo})
+        return render(request, "AppCoder/editar_clientes.html",{'form':clientes_form})
 
 def buscar_codigo(request):
     if request.method=="POST":
