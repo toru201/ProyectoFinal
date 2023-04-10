@@ -2,6 +2,7 @@ from django import forms
 from AppCoder.models import Productos
 from AppCoder.models import Clientes
 from AppCoder.models import Stock
+from AppCoder.models import Post
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -43,3 +44,16 @@ class UserRegisterForm(UserCreationForm):
         model=User
         fields=["username","email","password1","password2"]
         help_texts={k:"" for k in fields}
+
+class PostForm(forms.ModelForm):
+    content=forms.CharField(widget=forms.Textarea(attrs={'class':'form-control w-100',
+                                'id':'contentsBox','rows':'3',
+                                'placeholder':'Qué hiciste durante la sesión?'}))
+
+    class Meta:
+        model= Post
+        fields= ['content']
+    
+    
+       
+                                                                   

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from AppCoder.models import *
 from AppCoder.forms import *
@@ -140,10 +140,6 @@ def buscar_codigo(request):
  
     return render(request, 'AppCoder/buscar_codigo.html', {"miFormulario": miFormulario})
 
-def feed(request):
-    posts= Post.objects.all()
-    context={'post':posts}
-    return render(request, 'AppCoder/feed.html',context)
 
 def register(request):
     if request.method=='POST':
@@ -156,3 +152,17 @@ def register(request):
         form=UserRegisterForm()
     context={'form':form}
     return render(request, 'AppCoder/register.html', context)
+
+def post(request):
+    current_user= get_object_or_404(User, pk=request.user.pk)
+    if request.method=='POST':
+        form= PostForm(request.POST)
+        if form.is_valid():
+            post=form.save(commit=False)
+            post.user=current_user
+            post.save()
+            messages.success(request,'Post enviado' )
+            return render(request,'AppCoder/index.html')
+    else:
+        form=PostForm()
+    return render(request, 'AppCoder/post.html', {'form': form})
