@@ -27,11 +27,20 @@
                 <a class="navbar-brand" href="{% url 'clientes' %}">Clientes</a>
                 <a class="navbar-brand" href="{% url 'productos' %}">Productos</a>
                 <a class="navbar-brand" href="{% url 'stock' %}">Stock</a>
-                <a class="navbar-brand" href="{% url 'mostrar_codigos' %}">Mostrar</a>
+                <a class="navbar-brand" href="{% url 'mostrar_codigos' %}">Mostrar Productos</a>
+                <a class="navbar-brand" href="{% url 'register' %}">Registro</a>
+                <a class="navbar-brand" href="{% url 'login' %}">Login</a>
                 <a class="btn btn-primary" href="#signup">Sign Up</a>
             </div>
         </nav>
       
+        {% if messages %}
+            {% for message in messages %}
+            <div class="notification {{ message.tags}}">
+                {{message}}
+            </div>
+            {% endfor %}
+        {% endif %}
 
         {% block contenido_que_cambia %}
         {% endblock %}

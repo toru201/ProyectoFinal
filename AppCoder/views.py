@@ -2,7 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from AppCoder.models import *
 from AppCoder.forms import *
-
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -104,3 +108,20 @@ def buscar_codigo(request):
             miFormulario = ProductosForm()
  
     return render(request, 'AppCoder/buscar_codigo.html', {"miFormulario": miFormulario})
+
+def feed(request):
+    posts= Post.objects.all()
+    context={'post':posts}
+    return render(request, 'AppCoder/feed.html',context)
+
+def register(request):
+    if request.method=='POST':
+        form=UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username=form.cleaned_data['username']
+            messages.success(request, f'Usuario {username} creado')
+    else:
+        form=UserRegisterForm()
+    context={'form':form}
+    return render(request, 'AppCoder/register.html', context)

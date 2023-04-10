@@ -2,6 +2,8 @@ from django import forms
 from AppCoder.models import Productos
 from AppCoder.models import Clientes
 from AppCoder.models import Stock
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class ProductosForm(forms.ModelForm):
     class Meta:
@@ -31,3 +33,13 @@ class StockForm(forms.ModelForm):
 
 class BuscarCodigoForm(forms.Form):
     codigo=forms.IntegerField()
+
+class UserRegisterForm(UserCreationForm):
+    email=forms.EmailField()
+    password1=forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+    password2=forms.CharField(label="Confirma Contraseña", widget=forms.PasswordInput)
+
+    class Meta:
+        model=User
+        fields=["username","email","password1","password2"]
+        help_texts={k:"" for k in fields}
