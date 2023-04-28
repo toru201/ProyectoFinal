@@ -19,37 +19,15 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'AppCoder/css/styles.css' %}" rel="stylesheet" />
     </head>
-</body>
-<div style="text-align:center; margin-right:100px; color: blue">
-    
-    
-    {% if user.is_authenticated %}
-
-    Hola {{user.username}}
-
-    {% else %}
-
-    No autenticado
-
-    {% endif %}
-    
-    
-    
-    </div>
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'index' %}">Inicio</a>
-                <a class="navbar-brand" href="{% url 'clientes' %}">Clientes</a>
-                <a class="navbar-brand" href="{% url 'productos' %}">Productos</a>
-                <a class="navbar-brand" href="{% url 'stock' %}">Stock</a>
-                <a class="navbar-brand" href="{% url 'mostrar_codigos' %}">Mostrar Productos</a>
-                <a class="navbar-brand" href="{% url 'mostrar_clientes' %}">Mostrar Clientes</a>
-                <a class="navbar-brand" href="{% url 'post' %}">Postear</a>
-                <a class="navbar-brand" href="{% url 'editarPerfil' %}">Editar Perfil</a>
-                <a class="navbar-brand" href="{% url 'logout' %}">Logout</a>
-                </div>
+                <a class="navbar-brand" href="{% url 'about' %}">Sobre Mí</a>
+                <a class="navbar-brand" href="{% url 'register' %}">Registrarse</a>
+                <a class="navbar-brand" href="{% url 'logear' %}">Login</a>
+                
+            </div>
         </nav>
       
         {% if messages %}
@@ -74,6 +52,4 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
-
-    
 </html>

@@ -14,8 +14,6 @@ urlpatterns = [
     path('eliminar_codigos/<int:id_productos>',eliminar_codigos,name="eliminar_codigos"),
     path('eliminar_clientes/<int:id_clientes>',eliminar_clientes,name="eliminar_clientes"),
     path('post/',post,name="post"),
-    path('register/',register,name="register"),
-    path('login/',LoginView.as_view(template_name="AppCoder/login.html"),name="login"),
     path('logout/',LogoutView.as_view(template_name="AppCoder/logout.html"),name="logout"),
     path('profile/',profile,name="profile"),
     path('profile/<str:username>/',profile,name="profile"),

@@ -7,7 +7,9 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User 
+from django.contrib.auth import login, authenticate,logout
+
 
 # Create your views here.
 
@@ -78,9 +80,9 @@ def mostrar_codigos(request):
 
 def mostrar_clientes(request):
 
-    codigos=Clientes.objects.all()
-
-    return render(request, "AppCoder/mostrar_clientes.html",{"codigos":codigos})
+    
+        codigos=Clientes.objects.all()
+        return render(request, "AppCoder/mostrar_clientes.html",{"codigos":codigos})
 
 def eliminar_codigos(request, id_productos):
 
@@ -142,17 +144,7 @@ def buscar_codigo(request):
     return render(request, 'AppCoder/buscar_codigo.html', {"miFormulario": miFormulario})
 
 
-def register(request):
-    if request.method=='POST':
-        form=UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username=form.cleaned_data['username']
-            messages.success(request, f'Usuario {username} creado')
-    else:
-        form=UserRegisterForm()
-    context={'form':form}
-    return render(request, 'AppCoder/register.html', context)
+
 
 def post(request):
     current_user= get_object_or_404(User, pk=request.user.pk)
