@@ -23,7 +23,9 @@ Clientes
                             <!-- To make this form functional, sign up at-->
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
-                            <form action="" class="agregar_productos" method="POST">
+                                                
+
+                             <form action="" class="agregar_productos" method="POST">
                                 
                                 {% csrf_token %}
                                 {{form}}
@@ -32,10 +34,12 @@ Clientes
                                 
                                 
                             </form> 
+                            
+                        
                         </div>
                     </div>
                 </div>
             </div>
         </header>
         
-{% endblock%}
+    {% endblock%}

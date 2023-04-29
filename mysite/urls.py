@@ -24,6 +24,6 @@ urlpatterns = [
     path("about", about,name="about"),
     path('AppCoder/',include('AppCoder.urls')),
     path('register/',VRegistro.as_view(),name="register"),
-    path('logear/',logear,name="logear")
+    path('accounts/login/',logear,name="logear")
     
     ]

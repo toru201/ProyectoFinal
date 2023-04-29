@@ -9,13 +9,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.models import User 
 from django.contrib.auth import login, authenticate,logout
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 
 def index(request):
     return render(request,'AppCoder/index.html')
-    
+
+
 def clientes(request):
     data={
          'form':ClientesForm()
@@ -29,6 +31,7 @@ def clientes(request):
             data["form"] = miFormulario
  
     return render(request,'AppCoder/clientes.html',data)
+
 
 def productos(request):
     data={
